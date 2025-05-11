@@ -27,4 +27,4 @@ This Burp extension allows you to extract subdomains related to a target domain 
 5. The extension will:
    - Extract subdomains like api.example.com, dev.example.com, etc.
    - Print them in the extension output.
-6. Copy them to your clipboard automatically.
+   - Copy them to your clipboard automatically.
