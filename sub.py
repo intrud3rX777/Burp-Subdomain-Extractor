@@ -16,23 +16,24 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
     def createMenuItems(self, invocation):
         self._invocation = invocation
         menuList = ArrayList()
-        menuList.add(swing.JMenuItem("Extract Subdomains (by domain)", actionPerformed=self.extractSubdomainsByDomain))
+        menuList.add(swing.JMenuItem("Extract Subdomains (by root name)", actionPerformed=self.extractSubdomainsByRoot))
         return menuList
 
-    def extractSubdomainsByDomain(self, event):
-        domain_input = swing.JOptionPane.showInputDialog("Enter domain to filter subdomains (e.g., example.com):")
-        if not domain_input:
+    def extractSubdomainsByRoot(self, event):
+        root_input = swing.JOptionPane.showInputDialog("Enter root domain name (e.g., example):")
+        if not root_input:
             return
 
-        domain_input = domain_input.strip().lower()
-        if not re.match(r'^[a-z0-9.-]+\.[a-z]{2,}$', domain_input):
-            swing.JOptionPane.showMessageDialog(None, "Invalid domain format.")
+        root_input = root_input.strip().lower()
+        if not re.match(r'^[a-z0-9-]+$', root_input):
+            swing.JOptionPane.showMessageDialog(None, "Invalid root domain name.")
             return
 
         http_messages = self._invocation.getSelectedMessages()
         extracted_subdomains = set()
 
-        domain_pattern = r'\b(?:[a-zA-Z0-9-]+\.)+' + re.escape(domain_input) + r'\b'
+        # Match domains like a.example.com, b.api.example.org, etc.
+        domain_pattern = r'\b(?:[a-zA-Z0-9-]+\.)+(?:' + re.escape(root_input) + r')\.[a-z]{2,}\b'
         unwanted_extensions = ('.js', '.css', '.scss', '.map', '.ts', '.jsx', '.json')
 
         for message in http_messages:
@@ -55,7 +56,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory):
             swing.JOptionPane.showMessageDialog(None, "{} subdomains copied to clipboard!".format(len(extracted_subdomains)))
             print("Filtered subdomains:\n" + output)
         else:
-            swing.JOptionPane.showMessageDialog(None, "No matching subdomains found for '{}'.".format(domain_input))
+            swing.JOptionPane.showMessageDialog(None, "No matching subdomains found for '{}'.".format(root_input))
 
     def copyToClipboard(self, text):
         stringSelection = StringSelection(text)
