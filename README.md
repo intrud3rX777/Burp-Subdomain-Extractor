@@ -28,3 +28,6 @@ This Burp extension allows you to extract subdomains based on a root domain (e.g
    - Extract subdomains like api.example.com, dev.example.org, cdn.example.in, etc.
    - Print them in the extension output.
    - Copy them to your clipboard automatically.
+
+<img width="958" alt="image" src="https://github.com/user-attachments/assets/81b8fae0-2b7d-410c-83d9-bae545433a3e" />
+
