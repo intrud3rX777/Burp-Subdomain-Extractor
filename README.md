@@ -16,7 +16,7 @@ This Burp extension allows you to extract subdomains related to a target domain 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/burp-subdomain-extractor.git
+   git clone https://github.com/samireddi-manikanta/Burp-Subdomain-Extractor.git
 2. Load the py file in extensions.
 
 ## 🚀 Usage
