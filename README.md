@@ -1,14 +1,14 @@
 # Burp Subdomain Extractor
 
-A simple Burp Suite extension to extract subdomains from selected HTTP requests.
+A simple Burp Suite extension to extract subdomains from selected HTTP responses.
 
 ## 🔍 Overview
 
-This Burp extension allows you to extract subdomains related to a target domain from HTTP requests selected in Burp's History or Search tab.
+This Burp extension allows you to extract subdomains based on a root domain (e.g., example) from HTTP responses selected in Burp's History or Search tab.
 
 - 📥 Select one or more requests from Burp History or Search.
-- ✏️ Input the domain you want to extract subdomains for (e.g., `example.com`).
-- 📋 The extension extracts all matching subdomains:
+- ✏️ Input only the root domain (e.g., example).
+- 📋 The extension extracts all matching subdomains regardless of TLD:
   - ✅ Prints them to the extension output panel.
   - ✅ Copies them to your clipboard for easy access.
 
@@ -23,8 +23,8 @@ This Burp extension allows you to extract subdomains related to a target domain 
 1. Navigate to the Proxy → HTTP History or Search tab in Burp Suite.
 2. Select one or more HTTP requests.
 3. Right-click and choose the extension option (e.g., "Extract Subdomains").
-4. Enter the target domain (e.g., example.com)
+4. Enter the root domain name (e.g., example)
 5. The extension will:
-   - Extract subdomains like api.example.com, dev.example.com, etc.
+   - Extract subdomains like api.example.com, dev.example.org, cdn.example.in, etc.
    - Print them in the extension output.
    - Copy them to your clipboard automatically.
